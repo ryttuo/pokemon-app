@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { PokemonService } from './pokemon.service';
 import { forkJoin } from 'rxjs';
+import { IPokemon, IPokemonData } from '@pokemon-app/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -9,22 +10,26 @@ import { forkJoin } from 'rxjs';
 export class PokemonFacadeService {
   constructor(private pokemonService: PokemonService) {}
 
-  async getPokemons(offset: number, limit: number): Promise<any> {
+  async getPokemons(offset: number, limit: number): Promise<IPokemonData> {
     try {
       const allPokemons = await lastValueFrom(
         this.pokemonService.getPokemons(offset, limit)
       );
 
-      const pokemonsRequest: Observable<any>[] = allPokemons.results.map(
-        (pokemon: any) => this.pokemonService.getPokemonDetails(pokemon.name)
+      const pokemonsRequest: Observable<IPokemon>[] = allPokemons.results.map(
+        (pokemon: IPokemon) =>
+          this.pokemonService.getPokemonDetails(pokemon.name)
       );
 
-      const results = await lastValueFrom(forkJoin(pokemonsRequest));
+      const results: IPokemon[] = await lastValueFrom(
+        forkJoin(pokemonsRequest)
+      );
       const { count, next, previous } = allPokemons;
 
       return { count, next, previous, results };
     } catch (error) {
       console.error('Error getting pokemons', error);
+      throw new Error(`Failed to fetch Pokemon data ${error}`);
     }
   }
 }

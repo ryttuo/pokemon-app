@@ -6,12 +6,30 @@
 
 [Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
+## Information
+
+🤖 This mono repo was build with an Angular 18 application (web-app) and a Nestjs 10 application (api-app) with a shared library @pokemon-app/interfaces to use same interfaces between front-end and backend
+
 ## Run tasks
 
-To run the dev server for your app, use:
+To run front-end you need to run:
 
 ```sh
+npm run web-app or npx nx serve web-app
+```
+or
+```sh
 npx nx serve web-app
+```
+
+To run back-end you need to run:
+
+```sh
+npm run api-app or npx nx serve api-app
+```
+or
+```sh
+npx nx serve api-app
 ```
 
 To create a production bundle:
@@ -29,6 +47,12 @@ npx nx show project web-app
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+## node version
+
+```sh
+18.20.0
+```
 
 ## Add new projects
 

@@ -1,20 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
+import { IPokemonData } from '@pokemon-app/interfaces';
 import { PokemonFacadeService } from '../../shared/services/pokemon/pokemon-facade.service';
 import { PokemonService } from '../../shared/services/pokemon/pokemon.service';
 
-interface IPokemonList {
-  image: string;
-  name: string;
-}
-
-interface IPokemonData {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: IPokemonList[];
-}
 
 @Component({
   selector: 'app-pokemon',
@@ -27,7 +17,7 @@ interface IPokemonData {
 export class PokemonComponent implements OnInit {
   public pokemonData: IPokemonData = {
     count: 0,
-    next: '',
+    next: null,
     previous: null,
     results: [],
   };
@@ -38,21 +28,21 @@ export class PokemonComponent implements OnInit {
 
   private pokemonFacade = inject(PokemonFacadeService);
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     await this.getPokemonsData();
   }
 
-  public async previousPage() {
+  public async previousPage():Promise<void> {
     this.offset -= this.limit;
     await this.getPokemonsData();
   }
 
-  public async nextPage() {
+  public async nextPage(): Promise<void> {
     this.offset += this.limit;
     await this.getPokemonsData();
   }
 
-  private async getPokemonsData() {
+  private async getPokemonsData(): Promise<void> {
     this.loading = true;
     this.current = this.offset / this.limit;
     this.pokemonData = await this.pokemonFacade.getPokemons(

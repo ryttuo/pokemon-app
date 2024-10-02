@@ -2,16 +2,18 @@
 
 <section>
   @if(loading) {
-  <div style="padding-bottom: 600px">loading...</div>
-  } @else { @for (pokemon of pokemonData.results; track pokemon.name) {
+  <div>loading...</div>
+  } @else { @for (pokemon of pokemonData.results; track pokemon.id) {
 
   <div style="display: flex; align-items: center">
     <img [src]="pokemon.image" width="60px" height="60px" />
     <p>{{ pokemon.name }}</p>
   </div>
 
-  } @empty { No Pokemons } }
+  } @empty { No Pokemons data } }
 </section>
+
+@if(!loading && pokemonData.results.length > 0) {
 
 <section style="display: flex; gap: 10px">
   <button (click)="previousPage()" [disabled]="!pokemonData.previous">
@@ -20,3 +22,5 @@
   <span>Page {{ current + 1 }} of {{ pokemonData.count }}</span>
   <button (click)="nextPage()" [disabled]="!pokemonData.next">Next</button>
 </section>
+
+}
