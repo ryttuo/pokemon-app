@@ -1,9 +1,20 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PokemonFacadeService } from '../../shared/services/pokemon/pokemon-facade.service';
-import { lastValueFrom } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
+import { PokemonFacadeService } from '../../shared/services/pokemon/pokemon-facade.service';
 import { PokemonService } from '../../shared/services/pokemon/pokemon.service';
+
+interface IPokemonList {
+  image: string;
+  name: string;
+}
+
+interface IPokemonData {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: IPokemonList[];
+}
 
 @Component({
   selector: 'app-pokemon',
@@ -14,11 +25,21 @@ import { PokemonService } from '../../shared/services/pokemon/pokemon.service';
   styleUrl: './pokemon.component.scss',
 })
 export class PokemonComponent implements OnInit {
+  public pokemonData: IPokemonData = {
+    count: 0,
+    next: '',
+    previous: null,
+    results: [],
+  };
+  public loading = false;
+
   private pokemonFacade = inject(PokemonFacadeService);
 
   async ngOnInit() {
-    const pokemonsData = await this.pokemonFacade.getPokemons(20, 20);
+    this.loading = true
+    this.pokemonData = await this.pokemonFacade.getPokemons(20, 20);
+    this.loading = false
 
-    console.log(pokemonsData);
+    console.log(this.pokemonData);
   }
 }

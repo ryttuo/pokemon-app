@@ -1,1 +1,12 @@
-<p>pokemon works!</p>
+<h1>Pokemon list</h1>
+
+@if(loading) {
+<span>loading...</span>
+} @else { @for (pokemon of pokemonData.results; track pokemon.name) {
+
+<div style="display: flex; align-items: center">
+  <img [src]="pokemon.image" />
+  <p>{{ pokemon.name }}</p>
+</div>
+
+} @empty { No Pokemons } }
