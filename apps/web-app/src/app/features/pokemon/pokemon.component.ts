@@ -32,14 +32,33 @@ export class PokemonComponent implements OnInit {
     results: [],
   };
   public loading = false;
+  public current = 0;
+  private limit = 10;
+  private offset = 0;
 
   private pokemonFacade = inject(PokemonFacadeService);
 
   async ngOnInit() {
-    this.loading = true
-    this.pokemonData = await this.pokemonFacade.getPokemons(20, 20);
-    this.loading = false
+    await this.getPokemonsData();
+  }
 
-    console.log(this.pokemonData);
+  public async previousPage() {
+    this.offset -= this.limit;
+    await this.getPokemonsData();
+  }
+
+  public async nextPage() {
+    this.offset += this.limit;
+    await this.getPokemonsData();
+  }
+
+  private async getPokemonsData() {
+    this.loading = true;
+    this.current = this.offset / this.limit;
+    this.pokemonData = await this.pokemonFacade.getPokemons(
+      this.offset,
+      this.limit
+    );
+    this.loading = false;
   }
 }
