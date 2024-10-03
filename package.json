@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "engines": {
-    "node": "18.20.0"
+      "node": "18.20.0"
   },
   "scripts": {
-    "web-app" : "nx serve web-app",
-    "api-app" : "nx serve api-app"
+    "web-app": "nx serve web-app",
+    "api-app": "nx serve api-app"
   },
   "private": true,
   "dependencies": {
@@ -54,7 +54,9 @@
     "@swc/helpers": "~0.5.11",
     "@types/jest": "^29.5.12",
     "@types/node": "18.16.9",
-    "@typescript-eslint/utils": "^7.16.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "@typescript-eslint/utils": "^8.8.0",
     "angular-eslint": "^18.3.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.0.0",
