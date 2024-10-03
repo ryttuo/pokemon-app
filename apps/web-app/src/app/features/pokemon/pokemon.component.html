@@ -19,7 +19,7 @@
   <button (click)="previousPage()" [disabled]="!pokemonData.previous">
     Previous
   </button>
-  <span>Page {{ current + 1 }} of {{ pokemonData.count }}</span>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
   <button (click)="nextPage()" [disabled]="!pokemonData.next">Next</button>
 </section>
 

@@ -6,6 +6,7 @@ export interface IPokemon {
 }
 
 export interface IPokemonData {
+  uuid?: string;
   count: number;
   next: string | null;
   previous: string | null;

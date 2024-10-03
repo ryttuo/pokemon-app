@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IPokemon, IPokemonData } from '@pokemon-app/interfaces';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ export class PokemonService {
 
   readonly apiUrl = 'http://localhost:3000'
 
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   getPokemons(offset: number, limit: number): Observable<IPokemonData> {
     return this.http.get<IPokemonData>(`${this.apiUrl}/api/pokemons?offset=${offset}&limit=${limit}`);

@@ -8,14 +8,15 @@
 
 ## Information
 
-🤖 This mono repo was build with an Angular 18 application (web-app) and a Nestjs 10 application (api-app) with a shared library @pokemon-app/interfaces to use same interfaces between front-end and backend
+🤖 This mono repo was build with an Angular 18 application (web-app) and a Nestjs 10 application (api-app) with a shared library @pokemon-app/interfaces to use same interfaces between front-end and backend and dexie.js to cache pages result into indexedDB.
+
 
 ## Run tasks
 
 To run front-end you need to run:
 
 ```sh
-npm run web-app or npx nx serve web-app
+npm run web-app
 ```
 or
 ```sh
@@ -25,7 +26,7 @@ npx nx serve web-app
 To run back-end you need to run:
 
 ```sh
-npm run api-app or npx nx serve api-app
+npm run api-app
 ```
 or
 ```sh
