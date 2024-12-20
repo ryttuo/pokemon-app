@@ -6,7 +6,7 @@
     "node": "18.20.0"
   },
   "scripts": {
-    "web-app": "nx serve web-app",
+    "web-app": "nx serve web-app --port 4300",
     "api-app": "nx serve api-app"
   },
   "private": true,
